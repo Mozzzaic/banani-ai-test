@@ -59,6 +59,7 @@ Open [http://localhost:3000](http://localhost:3000) and type a prompt.
 ```bash
 npm run lint
 npm run test
+npm run test:coverage
 npm run build
 ```
 
@@ -74,7 +75,7 @@ A local CI workflow is included at:
 
 `/Users/davidpinheiro/Documents/06_Dev_Web/Projects/banani-test/.github/workflows/ci.yml`
 
-It runs `npm ci`, `npm run lint`, `npm run test`, and `npm run build` on push and pull requests.
+It runs `npm ci`, `npm run lint`, `npm run test:coverage`, and `npm run build` on push and pull requests.
 
 ## Bonus features
 

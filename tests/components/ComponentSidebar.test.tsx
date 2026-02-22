@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { parseElements } from "@/components/ComponentSidebar";
 import ComponentSidebar from "@/components/ComponentSidebar";
@@ -59,6 +59,24 @@ function makeComponent(overrides: Partial<Component> = {}): Component {
 }
 
 describe("ComponentSidebar interactions", () => {
+    it("calls onHoverComponent on enter and clears on leave", () => {
+        const onHover = vi.fn();
+
+        render(
+            <ComponentSidebar
+                components={[makeComponent({ id: "hero-1" })]}
+                onHoverComponent={onHover}
+            />
+        );
+
+        const card = screen.getByTestId("component-card-hero-1");
+        fireEvent.mouseEnter(card);
+        fireEvent.mouseLeave(card);
+
+        expect(onHover).toHaveBeenNthCalledWith(1, "hero-1");
+        expect(onHover).toHaveBeenNthCalledWith(2, null);
+    });
+
     it("calls onEditComponent with the component name when clicking edit", async () => {
         const onEdit = vi.fn();
         const user = userEvent.setup();

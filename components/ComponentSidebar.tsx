@@ -156,6 +156,7 @@ export default function ComponentSidebar({ components, onHoverComponent, onEditC
                         return (
                             <div
                                 key={comp.id}
+                                data-testid={`component-card-${comp.id}`}
                                 className="rounded-lg transition-colors border border-transparent hover:border-blue-400/60"
                                 onMouseEnter={() => onHoverComponent?.(comp.id)}
                                 onMouseLeave={() => onHoverComponent?.(null)}
