@@ -200,7 +200,7 @@ Route tests mock `processPrompt()` so tests stay deterministic and do not call G
 | Phase | Model | Why |
 |---|---|---|
 | Router | Gemini 2.5 Flash | Fast (~1-2s). Only classifies intent — doesn't generate HTML. |
-| Executor | Gemini 3.1 Pro | Quality HTML/Tailwind output. Visual polish matters here. |
+| Executor | Gemini 2.5 Pro | Quality HTML/Tailwind output. Visual polish matters here. |
 
 ## File Map
 

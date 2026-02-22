@@ -22,7 +22,7 @@ Separating routing from generation keeps each step simple. The Router only class
 | Phase | Model | Role |
 |---|---|---|
 | Router | Gemini 2.5 Flash | Picks the tool (~1-2s) |
-| Executor | Gemini 3.1 Pro | Generates HTML/Tailwind |
+| Executor | Gemini 2.5 Pro | Generates HTML/Tailwind |
 
 ## Setup
 
@@ -73,7 +73,7 @@ npm run build
 
 A local CI workflow is included at:
 
-`/Users/davidpinheiro/Documents/06_Dev_Web/Projects/banani-test/.github/workflows/ci.yml`
+`.github/workflows/ci.yml`
 
 It runs `npm ci`, `npm run lint`, `npm run test:coverage`, and `npm run build` on push and pull requests.
 
