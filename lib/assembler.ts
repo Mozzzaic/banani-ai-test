@@ -20,7 +20,7 @@ export function assembleScreen(components: Component[]): string {
     <title>Generated Screen Component</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white min-h-screen text-slate-900">
+<body class="min-h-screen">
     ${bodyHtml}
     <script>
     window.addEventListener('message', (e) => {

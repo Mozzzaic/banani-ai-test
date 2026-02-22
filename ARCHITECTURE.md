@@ -120,9 +120,21 @@ The Assembler (`lib/assembler.ts`) is minimal:
 3. Add HTML comments around each for debugging
 4. Inject into a standard HTML document with Tailwind CDN
 
-Components go directly into `<body>` — no wrapper div, no forced flex layout. The generated HTML controls its own layout.
+Components go directly into `<body>` — no wrapper div, no forced flex layout. The `<body>` has no background color either; the generated components decide their own colors and backgrounds. This lets the model produce dark themes, gradients, or whatever fits the prompt without fighting a hardcoded white page.
 
-## 5. Component Highlighting
+## 5. Loading States
+
+The canvas has three visual states so the user always knows what's happening:
+
+| State | When | What the user sees |
+|---|---|---|
+| Skeleton | First generation (empty canvas) | Animated grey blocks shaped like a typical page — nav bar, hero area, card grid, footer. Feels faster than a blank screen. |
+| Overlay | Follow-up prompt (screen already exists) | The previous preview stays visible under a frosted-glass overlay with a spinner and a live status line ("Generating Hero..."). |
+| Idle | Nothing loading | The iframe shows the rendered page, or the empty-state message if no prompt has been sent yet. |
+
+Status messages come from the SSE stream in real time, so the user can see which component the Executor is currently working on.
+
+## 6. Component Highlighting
 
 The sidebar and iframe communicate via `postMessage`:
 
@@ -130,7 +142,7 @@ The sidebar and iframe communicate via `postMessage`:
 2. A script inside the iframe applies a blue outline to the matching `data-component-id` wrapper (and its children, to handle `position: fixed/sticky` elements like navbars)
 3. The iframe uses an `onLoad` callback to ensure the highlight script is ready before accepting messages
 
-## 6. Conversation Flow
+## 7. Conversation Flow
 
 ### Message history
 The full conversation history is passed to the Router every turn. This is how it resolves references like "the header" or "that section with the pricing".
@@ -147,7 +159,7 @@ This gives the Router context on follow-up turns.
 ### Style guide persistence
 The `style_guide` from `generate_screen` is saved and automatically passed to subsequent calls. This prevents partial updates from drifting away from the original design.
 
-## 7. Streaming (SSE)
+## 8. Streaming (SSE)
 
 The API route uses Server-Sent Events to push real-time status updates:
 
@@ -162,7 +174,7 @@ event: done   -> { screen, messages }
 
 Implemented via a `ReadableStream` response and an `onStatus` callback passed into `processPrompt()`.
 
-## 8. Session Isolation
+## 9. Session Isolation
 
 Session state is now scoped by browser cookie, not by a single global key.
 
@@ -179,7 +191,7 @@ Why this matters:
 - `GET /api/session` hydrates the UI after refresh.
 - Reset is scoped to the active browser session only.
 
-## 9. Testing Strategy
+## 10. Testing Strategy
 
 The project uses **Vitest** with **Testing Library**.
 
@@ -195,12 +207,12 @@ Covered areas:
 
 Route tests mock `processPrompt()` so tests stay deterministic and do not call Gemini.
 
-## 10. Dual-Model Strategy
+## 11. Dual-Model Strategy
 
 | Phase | Model | Why |
 |---|---|---|
 | Router | Gemini 2.5 Flash | Fast (~1-2s). Only classifies intent — doesn't generate HTML. |
-| Executor | Gemini 2.5 Pro | Quality HTML/Tailwind output. Visual polish matters here. |
+| Executor | Gemini 3.1 Pro | Quality HTML/Tailwind output. Visual polish matters here. |
 
 ## File Map
 
@@ -222,7 +234,7 @@ app/
 components/
   ComponentSidebar.tsx  -> Component tree with expandable element inspector + edit buttons
   PromptBox.tsx         -> Controlled chat input + streaming status display
-  ScreenRenderer.tsx    -> Sandboxed iframe with postMessage highlighting
+  ScreenRenderer.tsx    -> Sandboxed iframe with postMessage highlighting + loading skeleton/overlay
   ResetButton.tsx       -> Clears session state
 
 tests/

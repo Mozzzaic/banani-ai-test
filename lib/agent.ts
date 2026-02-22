@@ -3,7 +3,7 @@ import { SessionState, Component, Screen } from './types';
 import { assembleScreen } from './assembler';
 
 const ROUTER_MODEL = "gemini-2.5-flash";      // fast, cheap — just picks the right tool
-const GENERATOR_MODEL = "gemini-2.5-pro";          // stable, high-quality HTML output
+const GENERATOR_MODEL = "gemini-3.1-pro-preview"; // preview model — best HTML quality
 
 // Lazy init so env vars are available at request time (not module load).
 let _client: GoogleGenAI | null = null;

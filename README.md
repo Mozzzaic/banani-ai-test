@@ -22,7 +22,7 @@ Separating routing from generation keeps each step simple. The Router only class
 | Phase | Model | Role |
 |---|---|---|
 | Router | Gemini 2.5 Flash | Picks the tool (~1-2s) |
-| Executor | Gemini 2.5 Pro | Generates HTML/Tailwind |
+| Executor | Gemini 3.1 Pro | Generates HTML/Tailwind |
 
 ## Setup
 
@@ -82,6 +82,8 @@ It runs `npm ci`, `npm run lint`, `npm run test:coverage`, and `npm run build` o
 - **Component highlighting**: hover a component in the sidebar to highlight it in the preview
 - **Element inspector**: expand any component to see its inner elements (headings, buttons, links...)
 - **Scoped editing**: click the edit icon on any component or element to pre-fill a targeted prompt
+- **Loading feedback**: a skeleton placeholder animates while the first screen generates; on follow-up prompts, a translucent overlay with a spinner keeps the previous preview visible so the user never stares at a blank canvas
+- **Automatic retries**: if the Gemini API returns a transient error (503, timeout), the Executor retries up to 3 times with exponential backoff — no manual refresh needed
 
 ## Known limitations
 

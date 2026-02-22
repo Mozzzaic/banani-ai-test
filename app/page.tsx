@@ -205,7 +205,7 @@ export default function Home() {
 
         {/* Canvas — the generated UI lives here */}
         <div className="flex-1 min-h-0 p-4">
-          <ScreenRenderer htmlContent={screen?.assembledHtml || ""} highlightedComponentId={hoveredComponentId} />
+          <ScreenRenderer htmlContent={screen?.assembledHtml || ""} highlightedComponentId={hoveredComponentId} isLoading={isLoading} statusMessage={statusMessage} />
         </div>
 
         {/* Chat panel */}
