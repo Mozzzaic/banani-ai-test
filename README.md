@@ -2,6 +2,10 @@
 
 A UI generator that turns natural language prompts into fully rendered web pages. Built for the Banani AI technical test.
 
+**Live demo:** [banani-ai-test.vercel.app](https://banani-ai-test.vercel.app/)
+
+Try typing "a sneaker shop" to see it in action.
+
 ## How it works
 
 The app uses a **two-phase agent architecture**:
@@ -24,7 +28,7 @@ Separating routing from generation keeps each step simple. The Router only class
 | Router | Gemini 2.5 Flash | Picks the tool (~1-2s) |
 | Executor | Gemini 3.1 Pro | Generates HTML/Tailwind |
 
-## Setup
+## Local setup
 
 ```bash
 npm install
@@ -36,13 +40,9 @@ Create a `.env.local` in the project root:
 GEMINI_API_KEY=your_key_here
 ```
 
-Run:
-
 ```bash
 npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) and type a prompt.
 
 > See [ARCHITECTURE.md](./ARCHITECTURE.md) for the full deep dive on tool design, data model, and streaming.
 
