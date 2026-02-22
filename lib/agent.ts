@@ -162,8 +162,7 @@ DECOMPOSITION:
 Return ONLY the raw HTML fragment — no <!DOCTYPE>, <html>, <head>, <body>, or <script> tags.
 This component will be placed inside a page alongside other components, so do NOT use min-h-screen or full-page wrappers.
 Use realistic, specific placeholder text that feels human-written. Never use em-dashes (—) or generic marketing fluff.
-The current year is 2026. Use 2026 for any copyright notices or dates.
-For images, ONLY use https://placehold.co URLs with a short descriptive label (e.g. https://placehold.co/600x400/png?text=Running+Shoe). Never hotlink real product images or use external image URLs. Always match the image label to the component topic.`;
+The current year is 2026. Use 2026 for any copyright notices or dates.`;
         if (styleGuide) {
             system += `\nStyle guide to follow: ${styleGuide}`;
         }
